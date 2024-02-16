@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src *;
+   img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
+   style-src  'self' 'unsafe-inline' *">
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #333;
+            font-family: "Montserrat", sans-serif;
+            margin: 0;
+        }
+
+        h1 {
+            color: #FFF;
+            font-size: 64px;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        header {
+            width: 100%;
+            height: 200px;
+            background: url("https://unsplash.it/g/1024/?image=209");
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 50px auto;
+        }
+
+        .sidebar {
+            display: inline-block;
+            width: 25%;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .sidebar i {
+            margin-right: 15px;
+        }
+
+        .sidebar__header {
+            vertical-align: top;
+            background: #FAFBFB;
+            padding: 20px;
+            border-bottom: 1px solid #F0F1F2;
+        }
+
+        .sidebar__header img.sidebar__avatar {
+            float: left;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .sidebar__header p {
+            line-height: 2em;
+            margin: 0;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: light;
+        }
+
+        .sidebar__header p span {
+            color: #348AA7;
+            font-weight: 900;
+        }
+
+        .sidebar__menu-item {
+            background: #FFF;
+            padding: 20px;
+            color: #999;
+            border-bottom: 1px solid #F0F1F2;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar__menu-item--active {
+            color: #000;
+            border-left: 3px solid #348AA7;
+        }
+
+        .sidebar__menu-item:hover {
+            background: #f7f7f7;
+            cursor: pointer;
+        }
+
+        .sidebar__label {
+            float: right;
+            font-size: 80%;
+            line-height: 1.6em;
+            color: #FDE756;
+        }
+
+        .sidebar__badge {
+            text-align: center;
+            float: right;
+            font-size: 70%;
+            line-height: 1.8em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            color: #FFF;
+            background: #348AA7;
+        }
+
+        .main {
+            width: 70%;
+            vertical-align: top;
+            display: inline-block;
+            background: #FFF;
+            margin-left: 3%;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .main__header {
+            padding: 20px;
+            border-bottom: 1px solid #F0F1F2;
+        }
+
+        .main__content {
+            padding: 20px;
+        }
+
+        .main__avatar {
+            background: url("https://unsplash.it/150/?image=209");
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+            display: block;
+            vertical-align: middle;
+            margin: 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .main__avatar:hover .main__avatar--overlay {
+            opacity: 1;
+            border-radius: 50%;
+        }
+
+        .main__avatar--overlay {
+            opacity: 0;
+            background: rgba(52, 138, 167, 0.6);
+            color: #FFF;
+            text-align: center;
+            line-height: 150px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .main__settings-form {
+            max-width: 80%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .main__input-label {
+            font-size: 80%;
+            color: #C4C1C9;
+            display: block;
+            margin: 5px 5px 5px 5px;
+        }
+
+        .main__input {
+            display: inline-block;
+            width: 100%;
+            border: 1px solid #F1F3F5;
+            margin-bottom: 20px;
+            outline: none;
+            padding: 15px;
+            border-radius: 3px;
+            color: #000;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .main__input:focus {
+            border: 1px solid #348AA7;
+            transition: all 0.3s ease;
+        }
+
+        .btn {
+            margin-bottom: 20px;
+            font-family: "Montserrat", sans-serif;
+            border: none;
+            outline: none;
+            padding: 15px 25px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .main__save-button {
+            color: #FFF;
+            background-color: #348AA7;
+        }
+
+        .main__save-button:hover {
+            background-color: #116479;
+            cursor: pointer;
+        }
+
+        .main__cancel-button {
+            color: #FFF;
+            background: #CCC;
+        }
+
+        .main__cancel-button:hover {
+            background-color: #b3b3b3;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #464C4F;
+            padding: 40px;
+            color: #CCC;
+            font-size: 90%;
+            text-align: center;
+            margin-top: 39vh;
+        }
+
+        @media (max-width: 764px) {
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .sidebar__menu-item {
+                padding: 15px;
+            }
+
+            .main {
+                width: 100%;
+                margin: 0;
+            }
+
+            h1 {
+                font-size: 44px;
+            }
+
+            footer {
+                text-align: center;
+            }
+        }
+    </style>
+    <title>Inven!RA | Configuração da Atividade</title>
+</head>
+
+<body>
+    <div class='container'>
+        <div class='sidebar'>
+            <div class='sidebar__header'>
+                <p><strong>Inven<span>!RA</span></strong></p>
+            </div>
+            <div class='sidebar__menu-item'>
+                <i class='fa fa-university'></i>
+                Início
+            </div>
+            <div class='sidebar__menu-item'>
+                <i class='fa fa-bar-chart'></i>
+                Deployed IAPs
+            </div>
+            <div class='sidebar__menu-item sidebar__menu-item--active'>
+                <i class='fa fa-cog'></i>
+                Atividades
+            </div>
+            <div class='sidebar__menu-item'>
+                <i class='fa fa-user-plus'></i>
+                Utilizadores
+            </div>
+            <div class='sidebar__menu-item'>
+                <i class='fa fa-envelope-o'></i>
+                Ajuda
+            </div>
+        </div>
+        <div class='main'>
+            <div class='main__header'>
+                <h2>Configuração da Atividade</h2>
+            </div>
+            <div class='main__content'>
+                <div class='main__settings-form'>
+                    <form action='#' method='post'>
+                        <label class='main__input-label'>Resumo:</label>
+                        <input class='main__input' placeholder='Resumo' type='text' name="resumo">
+                        <label class='main__input-label'>Instruções:</label>
+                        <input class='main__input' placeholder='Instruções' type='text' name="instrucoes">
+                    </form>
+                    <button class='btn main__save-button' type="submit">Salvar</button>
+                    <button class='btn main__cancel-button' type="reset">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        2024 &copy; Rogério Mandala. Todos direitos reservados.
+    </footer>
+
+</body>
+
+</html>
